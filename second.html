@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Happy Birthday — Multi-Page Celebration</title>
+    <style>
+      :root {
+        --bg1: #fff0f6;
+        --pink1: #ffd6e8;
+        --pink2: #ff7ab6;
+        --deep: #ff3f8b;
+        --card: #fff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+        background: linear-gradient(180deg, var(--bg1), #ffeaf4);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .app {
+        width: 980px;
+        max-width: 100%;
+        min-height: 620px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.85),
+          rgba(255, 255, 255, 0.9)
+        );
+        border-radius: 18px;
+        box-shadow: 0 18px 50px rgba(255, 100, 150, 0.12);
+        overflow: hidden;
+        position: relative;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 26px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 122, 182, 0.12),
+          transparent
+        );
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo .dot {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--pink1), var(--pink2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #fff;
+      }
+      .nav {
+        display: flex;
+        gap: 8px;
+      }
+      .nav button {
+        background: transparent;
+        border: 1px solid rgba(255, 0, 120, 0.08);
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      main {
+        padding: 26px;
+        position: relative;
+      }
+      .pages {
+        display: flex;
+        gap: 20px;
+      }
+      .page {
+        flex: 1;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 0.95)
+        );
+        border-radius: 14px;
+        padding: 18px;
+        min-height: 460px;
+        position: relative;
+      }
+      .hidden {
+        display: none;
+      }
+
+      .cover {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px;
+      }
+      .cover h1 {
+        font-size: 42px;
+        margin: 0;
+        color: var(--deep);
+        letter-spacing: 0.6px;
+      }
+      .cover p {
+        margin-top: 12px;
+        color: #6b2340;
+        font-size: 16px;
+      }
+      .cta {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+      }
+      .btn {
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .btn-primary {
+        background: linear-gradient(90deg, var(--deep), #ff6aa6);
+        color: white;
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 0, 120, 0.12);
+      }
+
+      .photo-area {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
+      .frame {
+        width: 320px;
+        height: 320px;
+        border-radius: 18px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #fff0f6, #ffe6f0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 0, 120, 0.06);
+        cursor: pointer;
+      }
+      .frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .card-text {
+        flex: 1;
+      }
+      .card-text h2 {
+        margin: 0;
+        color: var(--deep);
+        font-size: 30px;
+      }
+      .card-text p {
+        margin-top: 12px;
+        color: #6b2340;
+      }
+      .inputs {
+        margin-top: 14px;
+        display: flex;
+        gap: 8px;
+      }
+      .inputs input,
+      .inputs textarea {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        font-size: 14px;
+      }
+
+      .celebrate {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 30px;
+      }
+      .big-text {
+        font-size: 36px;
+        color: var(--deep);
+        font-weight: 800;
+      }
+      .sub-text {
+        margin-top: 10px;
+        color: #6b2340;
+      }
+      .celebrate-controls {
+        margin-top: 18px;
+        display: flex;
+        gap: 10px;
+      }
+
+      footer {
+        padding: 14px 20px;
+        border-top: 1px solid rgba(255, 0, 120, 0.03);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .small {
+        font-size: 13px;
+        color: #6b2340;
+      }
+
+      .balloons {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        display: flex;
+        gap: 10px;
+        z-index: 2;
+      }
+      .balloon {
+        width: 46px;
+        height: 64px;
+        border-radius: 36px 36px 28px 28px;
+        background: linear-gradient(180deg, #ffe6f2, #ff9ec7);
+        position: relative;
+        animation: float 5s ease-in-out infinite;
+      }
+      .balloon::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -18px;
+        width: 2px;
+        height: 36px;
+        background: linear-gradient(180deg, #fff, #ffd);
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-18px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .app {
+          padding: 10px;
+        }
+        .pages {
+          flex-direction: column;
+        }
+        .frame {
+          width: 100%;
+          height: 280px;
+        }
+      }
+      @media (max-width: 600px) {
+        .cover h1 {
+          font-size: 28px;
+        }
+        .cover p {
+          font-size: 14px;
+        }
+        .card-text h2 {
+          font-size: 22px;
+        }
+        .card-text p {
+          font-size: 14px;
+        }
+        .celebrate .big-text {
+          font-size: 28px;
+        }
+        .celebrate .sub-text {
+          font-size: 14px;
+        }
+        .frame {
+          height: 220px;
+        }
+        .balloon {
+          width: 36px;
+          height: 50px;
+        }
+        .btn {
+          padding: 12px 18px;
+          font-size: 16px;
+        }
+        .inputs {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <div class="logo">
+          <div class="dot">HB</div>
+          <div>
+            <div style="font-weight: 800">Happy Birthday</div>
+            <div style="font-size: 12px; color: #6b2340">
+              Personalized Pages
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <button id="navCover">Cover</button>
+          <button id="navCard">Card</button>
+          <button id="navCelebrate">Celebrate</button>
+        </div>
+      </header>
+      <main>
+        <div class="pages">
+          <!-- Cover Page -->
+          <section class="page" id="pageCover">
+            <div class="cover">
+              <h1>Happy Birthday, <span id="coverName">Friend</span> 🎂</h1>
+              <p id="coverSub">
+                A special day full of smiles, surprises, and sweet moments.
+              </p>
+              <div class="cta">
+                <button class="btn btn-primary" id="startBtn">Open Card</button>
+                <button class="btn btn-ghost" id="editCoverBtn">
+                  Edit Cover Text
+                </button>
+              </div>
+            </div>
+          </section>
+          <!-- Card Page -->
+          <section class="page hidden" id="pageCard">
+            <div class="photo-area">
+              <div class="frame" id="frame">
+                <div
+                  id="framePlaceholder"
+                  style="color: #b04a77; font-weight: 700"
+                >
+                  Click to upload photo
+                </div>
+                <img
+                  id="cardPhoto"
+                  src=""
+                  alt="Recipient photo"
+                  style="display: none"
+                />
+              </div>
+              <div class="card-text">
+                <h2>To: <span id="cardTo">Friend</span></h2>
+                <p id="cardMessage">
+                  Wishing you a day filled with love, laughter and unforgettable
+                  memories.
+                </p>
+                <div class="inputs">
+                  <input id="toInput" placeholder="Recipient name" />
+                  <input id="fromInput" placeholder="From (Your name)" />
+                  <button class="btn btn-primary" id="applyCard">Apply</button>
+                </div>
+              </div>
+            </div>
+            <input
+              type="file"
+              id="cardFile"
+              accept="image/*"
+              style="display: none"
+            />
+          </section>
+          <!-- Celebrate Page -->
+          <section class="page hidden" id="pageCelebrate">
+            <div class="celebrate">
+              <div class="big-text">Let the celebration begin!</div>
+              <div class="sub-text">
+                Press buttons below for confetti, fireworks & music.
+              </div>
+              <div class="celebrate-controls">
+                <button class="btn btn-primary" id="confettiBtn">
+                  Confetti 🎉
+                </button>
+                <button class="btn btn-ghost" id="fireworkBtn">
+                  Fireworks ✨
+                </button>
+                <button class="btn btn-primary" id="playMusic">
+                  Play Music ♪
+                </button>
+              </div>
+              <canvas
+                id="celeCanvas"
+                style="
+                  width: 100%;
+                  height: 320px;
+                  margin-top: 18px;
+                  border-radius: 12px;
+                "
+              ></canvas>
+            </div>
+          </section>
+        </div>
+        <div class="balloons" aria-hidden>
+          <div class="balloon"></div>
+          <div class="balloon" style="animation-delay: 0.8s"></div>
+          <div class="balloon" style="animation-delay: 1.6s"></div>
+        </div>
+      </main>
+      <footer>
+        <div class="small">
+          Tip: Click frames to upload photo. Use nav buttons to switch pages.
+        </div>
+        <div class="small">
+          Made with ❤ — Open this file in browser to share
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Navigation
+      const pageCover = document.getElementById("pageCover");
+      const pageCard = document.getElementById("pageCard");
+      const pageCelebrate = document.getElementById("pageCelebrate");
+      const navCover = document.getElementById("navCover");
+      const navCard = document.getElementById("navCard");
+      const navCelebrate = document.getElementById("navCelebrate");
+      const startBtn = document.getElementById("startBtn");
+      const editCoverBtn = document.getElementById("editCoverBtn");
+      const coverName = document.getElementById("coverName");
+      const coverTitle = document.querySelector("#pageCover h1");
+      const coverSub = document.getElementById("coverSub");
+
+      function show(page) {
+        pageCover.classList.add("hidden");
+        pageCard.classList.add("hidden");
+        pageCelebrate.classList.add("hidden");
+        page.classList.remove("hidden");
+      }
+      navCover.addEventListener("click", () => show(pageCover));
+      navCard.addEventListener("click", () => show(pageCard));
+      navCelebrate.addEventListener("click", () => show(pageCelebrate));
+      startBtn.addEventListener("click", () => show(pageCard));
+
+      // Edit cover
+      editCoverBtn.addEventListener("click", () => {
+        const name =
+          prompt("Recipient name?", coverName.textContent) || "Friend";
+        const subtitle =
+          prompt("Short message?", coverSub.textContent) ||
+          coverSub.textContent;
+        coverName.textContent = name;
+        coverSub.textContent = subtitle;
+        coverTitle.textContent = `Happy Birthday, ${name} 🎂`;
+      });
+
+      // Card photo upload
+      const frame = document.getElementById("frame");
+      const cardFile = document.getElementById("cardFile");
+      const cardPhoto = document.getElementById("cardPhoto");
+      const framePlaceholder = document.getElementById("framePlaceholder");
+      frame.addEventListener("click", () => cardFile.click());
+      cardFile.addEventListener("change", (e) => {
+        const f = e.target.files[0];
+        if (!f) return;
+        if (!f.type.startsWith("image/"))
+          return alert("Please select an image file");
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          cardPhoto.src = ev.target.result;
+          cardPhoto.style.display = "block";
+          framePlaceholder.style.display = "none";
+        };
+        reader.readAsDataURL(f);
+      });
+
+      // Apply card text
+      const applyCard = document.getElementById("applyCard");
+      const toInput = document.getElementById("toInput");
+      const fromInput = document.getElementById("fromInput");
+      const cardTo = document.getElementById("cardTo");
+      const cardMessage = document.getElementById("cardMessage");
+      applyCard.addEventListener("click", () => {
+        const to = toInput.value.trim() || "Friend";
+        const from = fromInput.value.trim();
+        cardTo.textContent = to;
+        coverName.textContent = to;
+        coverTitle.textContent = `Happy Birthday, ${to} 🎂`;
+        if (from) {
+          cardMessage.textContent = `Dear ${to},\n\nWishing you a wonderful birthday! May your day be filled with joy and surprises. Lots of love, ${from}.`;
+        }
+      });
+
+      // Canvas for confetti/fireworks
+      const canvas = document.getElementById("celeCanvas");
+      const ctx = canvas.getContext("2d");
+      function resizeCanvas() {
+        canvas.width = canvas.clientWidth;
+        canvas.height = 320;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // Confetti
+      function launchConfetti() {
+        const pieces = [];
+        const W = canvas.width,
+          H = canvas.height;
+        for (let i = 0; i < 180; i++) {
+          pieces.push({
+            x: Math.random() * W,
+            y: -Math.random() * H,
+            vx: (Math.random() - 0.5) * 4,
+            vy: 2 + Math.random() * 4,
+            r: 4 + Math.random() * 6,
+            c: `hsl(${320 + Math.random() * 60},70%,60%)`,
+            rot: Math.random() * Math.PI,
+          });
+        }
+        let anim = true;
+        function run() {
+          ctx.clearRect(0, 0, W, H);
+          for (const p of pieces) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.05;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.c;
+            ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6);
+            ctx.restore();
+          }
+          for (let i = pieces.length - 1; i >= 0; i--) {
+            if (pieces[i].y > H + 50) pieces.splice(i, 1);
+          }
+          if (pieces.length > 0 && anim) requestAnimationFrame(run);
+        }
+        run();
+        setTimeout(() => {
+          anim = false;
+        }, 3500);
+      }
+
+      // Fireworks
+      function launchFirework() {
+        const bursts = [];
+        const W = canvas.width,
+          H = canvas.height;
+        function createBurst(x, y) {
+          const parts = [];
+          for (let i = 0; i < 80; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 5;
+            parts.push({
+              x,
+              y,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              life: 60,
+              color: `hsl(${Math.random() * 360},80%,60%)`,
+            });
+          }
+          bursts.push(parts);
+        }
+        let running = true;
+        function run() {
+          ctx.globalCompositeOperation = "lighter";
+          ctx.fillStyle = "rgba(0,0,0,0.05)";
+          ctx.fillRect(0, 0, W, H);
+          for (const b of bursts) {
+            for (const p of b) {
+              p.x += p.vx;
+              p.y += p.vy;
+              p.vy += 0.06;
+              p.life--;
+              if (p.life > 0) {
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x, p.y, 2, 2);
+              }
+            }
+          }
+          if (running) requestAnimationFrame(run);
+        }
+        createBurst(W * 0.25, H * 0.5);
+        createBurst(W * 0.6, H * 0.35);
+        run();
+        setTimeout(() => {
+          running = false;
+        }, 3200);
+      }
+
+      document
+        .getElementById("confettiBtn")
+        .addEventListener("click", launchConfetti);
+      document
+        .getElementById("fireworkBtn")
+        .addEventListener("click", launchFirework);
+
+      // Music placeholder
+      let audio;
+      document.getElementById("playMusic").addEventListener("click", () => {
+        if (!audio) {
+          audio = new Audio();
+          audio.src = "";
+        } // add your audio source
+        if (audio.paused) {
+          audio.play().catch(() => alert("Enable audio in browser"));
+          this.textContent = "Pause Music ♪";
+        } else {
+          audio.pause();
+          this.textContent = "Play Music ♪";
+        }
+      });
+    </script>
+  </body>
+</html>
